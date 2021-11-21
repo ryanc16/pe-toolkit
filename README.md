@@ -26,7 +26,7 @@ ___
 ## Results
 The spec allows for zero or more `VS_VERSIONINFO` tables to be embedded in a single file. This means that not all files provided as input will contain a `VS_VERSIONINFO` table. If this is the case while attempting to parse a file, an error will be thrown informing of that.
 
-### getFixedFileInfo
+### getFixedFileInfo()
 This corresponds to the `VS_FIXEDFILEINFO` structure spec: https://docs.microsoft.com/en-us/windows/win32/api/verrsrc/ns-verrsrc-vs_fixedfileinfo
 
 Example:
