@@ -1,0 +1,27 @@
+{
+  "name": "vs-version-info",
+  "version": "0.1.0",
+  "description": "Reads the VS_VERSION_INFO data structure embedded in windows exe, msi, and dlls",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryanc16/vs-version-info-js.git"
+  },
+  "keywords": [
+    "vs version info",
+    "properties",
+    "windows",
+    "nodejs",
+    "exe",
+    "msi",
+    "dll"
+  ],
+  "author": "ryanc16",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryanc16/vs-version-info-js/issues"
+  },
+  "homepage": "https://github.com/ryanc16/vs-version-info-js#readme"
+}
