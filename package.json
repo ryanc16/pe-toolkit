@@ -4,6 +4,7 @@
   "description": "Reads the VS_VERSION_INFO data structure embedded in windows exe, msi, and dlls",
   "main": "index.js",
   "scripts": {
+    "test": "jasmine --config=jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/ryanc16/vs-version-info-js/issues"
   },
-  "homepage": "https://github.com/ryanc16/vs-version-info-js#readme"
+  "homepage": "https://github.com/ryanc16/vs-version-info-js#readme",
+  "devDependencies": {
+    "jasmine": "^3.10.0"
+  }
 }
