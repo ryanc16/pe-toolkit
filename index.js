@@ -2,8 +2,17 @@ const fs = require('fs');
 const BufferReader = require('./lib/buffer-reader');
 const DATA_TYPES = require('./lib/data-types');
 const SZ_WCHAR = DATA_TYPES.SZ_WCHAR;
+const FLAGS = require('./lib/flags');
 const {VS_VERSIONINFO_structure, StringFileInfo_structure, VarFileInfo_structure, VS_FIXEDFILEINFO_structure} = require('./lib/structures');
 
+/**
+ * Read a file from disk and collect all the VS_VERSIONINFO strutures found in it, if any.
+ * If no VS_VSERSIONINFO structures are found in the data, an Error indicating that will be thrown.
+ * 
+ * @param {string} file The path of a file on disk to parse the VS_VERSIONINFO data from
+ * @returns an array of VS_VERSIONINFO_RESULT
+ * @throws Error when no VS_VERSIONINFO tables can be found, or there is an error during parsing of a found structure
+ */
 function parseFromFile(file) {
     const buff = new BufferReader(fs.readFileSync(file));
     const VSVersionInfoKey = SZ_WCHAR(VS_VERSIONINFO_structure.szKey.value);
@@ -30,9 +39,7 @@ function parseFromFile(file) {
             buff.seekNext(VS_FIXEDFILEINFO_structure.dwSignature.value);
             const VS_FIXEDFILEINFO =  {};
             VS_FIXEDFILEINFO['dwSignature'] = buff.readDWord();
-            const strucVersionMinor = buff.readWord(true);
-            const strucVersionMajor = buff.readWord(true);
-            VS_FIXEDFILEINFO['dwStrucVersion'] = strucVersionMajor + '.' + strucVersionMinor;
+            VS_FIXEDFILEINFO['dwStrucVersion'] = [buff.readWord(true), buff.readWord(true)];
             VS_FIXEDFILEINFO['dwFileVersionLS'] = buff.readWord(true);
             VS_FIXEDFILEINFO['dwFileVersionMS'] = buff.readWord(true);
             buff.readDWord();
@@ -90,7 +97,7 @@ function parseFromFile(file) {
                 
                 // if wType is 0, value is binary data
                 if (StringTableEntry['wType'] === 0) {
-                    StringTableEntry['Value'] = StringTableEntry['Value'] = StringTableEntry['wValueLength'] > 0 ? buff.readWordsAsString(StringTableEntry['wValueLength']/2).trim() : '';
+                    StringTableEntry['Value'] = StringTableEntry['wValueLength'] > 0 ? buff.readWordsAsString(StringTableEntry['wValueLength']/2).trim() : '';
                 }
                 // else if wType is 1, value is text data
                 else if (StringTableEntry['wType'] === 1) {
@@ -137,7 +144,7 @@ function parseFromFile(file) {
                 }
                 // else if wType is 1, value is text data
                 else if (VarFileInfoVar['wType'] === 1) {
-
+                    VarFileInfoVar['Value'] = VarFileInfoVar['wValueLength'] > 0 ? buff.readStringZ().trim() : '';
                 }
                 else {
                     throw new Error(`Invalid wType value ${StringTableEntry['wType']} for szKey '${StringTableEntry['szKey']}' in VarFileInfo`)
@@ -156,26 +163,86 @@ function parseFromFile(file) {
     
 }
 
+/**
+ * A parsed VS_VERSIONINFO structure result container.
+ * 
+ * @param {string} file The original file path on disk that was parsed.
+ * @param {VS_VERSIONINFO_structure} data The javascript descriptor object containing the raw parsed data.
+ */
 function VS_VERSIONINFO_RESULT(file, data) {
     this.file = file;
     this.data = data;
 
-    this.getFixedFileInfo = function() {
-        return this.data.Value;
-    }
-
-    this.getStringFileInfo = function() {
-        const strFileInfo = {};
-        for (const infoEntry of this.data.Children.StringFileInfo.Children) {
-            strFileInfo[infoEntry.szKey] = {};
-            for (const strEntry of infoEntry.Children) {
-                strFileInfo[infoEntry.szKey][strEntry.szKey] = strEntry.Value;
-            }
+    /**
+     * Get a formatted VS_VERSIONINFO data object
+     * 
+     * @returns {object} The formatted javascript object
+     */
+    this.getVsVersionInfo = function() {
+        const vsVersionInfo = {
+            FixedFileInfo: this.getFixedFileInfo()
+        };
+        const StringFileInfo = this.getStringFileInfo();
+        if (StringFileInfo != null) {
+            vsVersionInfo['StringFileInfo'] = StringFileInfo;
         }
-        
-        return strFileInfo;
+        const VarFileInfo = this.getVarFileInfo();
+        if (VarFileInfo != null) {
+            vsVersionInfo['VarFileInfo'] = VarFileInfo;
+        }
+        return vsVersionInfo;
     }
 
+    /**
+     * Get a formatted VS_FIXEDFILEINFO data object
+     * 
+     * @returns {object} The formatted javascript object
+     */
+    this.getFixedFileInfo = function() {
+        const value = this.data.Value;
+        const fixedFileInfo = {
+            dwSignature: value.dwSignature,
+            dwStrucVersion: value.dwStrucVersion,
+            fileVersionLS: value.dwFileVersionLS,
+            fileVersionMS: value.dwFileVersionMS,
+            productVersionLS: value.dwProductVersionLS,
+            productVersionMS: value.dwProductVersionMS,
+            fileFlagsMask: value.dwFileFlagsMask,
+            fileFlags: FLAGS.parseFileFlags(value.dwFileFlags, value.dwFileFlagsMask),
+            fileOS: FLAGS.parseFileOSFlags(value.dwFileOS),
+            fileType: FLAGS.parseFileType(value.dwFileType),
+            fileSubtype: FLAGS.parseFileSubtype(value.dwFileSubtype),
+            fileDateLS: value.dwFileDateLS,
+            fileDateMS: value.dwFileDateMS
+        };
+        return fixedFileInfo;
+    }
+
+    /**
+     * Get a formatted StringFileInfo data object
+     * 
+     * @returns {object} The formatted javascript object
+     */
+    this.getStringFileInfo = function() {
+        if (typeof this.data.Children.StringFileInfo === 'object') {
+            const strFileInfo = {};
+            for (const infoEntry of this.data.Children.StringFileInfo.Children) {
+                strFileInfo[infoEntry.szKey] = {};
+                for (const strEntry of infoEntry.Children) {
+                    strFileInfo[infoEntry.szKey][strEntry.szKey] = strEntry.Value;
+                }
+            }
+            return strFileInfo;
+        } else {
+            return undefined;
+        }
+    }
+
+    /**
+     * Get an array of formatted StringTable objects
+     * 
+     * @returns {array} An array of the formatted StringTables
+     */
     this.getStringTables = function() {
         const strTables = [];
         for (const infoEntry of this.data.Children.StringFileInfo.Children) {
@@ -188,16 +255,21 @@ function VS_VERSIONINFO_RESULT(file, data) {
         return strTables;
     }
 
+    /**
+     * Get a formatted VarFileInfo data object
+     * 
+     * @returns {object} The formatted javascript object
+     */
     this.getVarFileInfo = function() {
-        const varTable = {};
-        for (const infoEntry of this.data.Children.VarFileInfo.Children) {
-            varTable[infoEntry.szKey] = infoEntry.Value;
+        if (typeof this.data.Children.VarFileInfo === 'object') {
+            const varTable = {};
+            for (const infoEntry of this.data.Children.VarFileInfo.Children) {
+                varTable[infoEntry.szKey] = infoEntry.Value;
+            }
+            return varTable;
+        } else {
+            return undefined;
         }
-        return varTable;
-    }
-
-    this.writeToFile = function() {
-        fs.writeFileSync(file+'.json', JSON.stringify(this.data, null, 2).replace(/\\u0000/g, ''));
     }
 }
 

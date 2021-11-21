@@ -16,6 +16,19 @@ describe('vs-version-info', function() {
         expect(results).toHaveSize(1);
     });
 
+    it('can get vs version info', function() {
+        const results = vsInfo.parseFromFile(testBinaryData);
+        const result0 = results[0];
+        const vsVersionInfo = result0.getVsVersionInfo();
+        
+        expect(vsVersionInfo).toBeInstanceOf(Object);
+        expect(vsVersionInfo).toEqual(jasmine.objectContaining({
+            FixedFileInfo: jasmine.objectContaining(result0.getFixedFileInfo()),
+            StringFileInfo: jasmine.objectContaining(result0.getStringFileInfo()),
+            VarFileInfo: jasmine.objectContaining(result0.getVarFileInfo())
+        }));
+    });
+
     it('can get fixed file info', function() {
         const results = vsInfo.parseFromFile(testBinaryData);
         const result0 = results[0];
@@ -24,18 +37,43 @@ describe('vs-version-info', function() {
         expect(fixedFileInfo).toBeInstanceOf(Object);
         expect(fixedFileInfo).toEqual(jasmine.objectContaining({
             "dwSignature": Buffer.from([0xBD, 0x04, 0xEF, 0xFE]),
-            "dwStrucVersion": "1.0",
-            "dwFileVersionLS": 3,
-            "dwFileVersionMS": 1,
-            "dwProductVersionLS": 3,
-            "dwProductVersionMS": 1,
-            "dwFileFlagsMask": 63,
-            "dwFileFlags": 0,
-            "dwFileOS": 262148,
-            "dwFileType": 1,
-            "dwFileSubtype": 0,
-            "dwFileDateLS": 0,
-            "dwFileDateMS": 0
+            "dwStrucVersion": [0x00, 0x01],
+            "fileVersionLS": 3,
+            "fileVersionMS": 1,
+            "productVersionLS": 3,
+            "productVersionMS": 1,
+            "fileFlagsMask": 63,
+            "fileFlags": {
+                debug: false,
+                prerelease: false,
+                patched: false,
+                privatebuild: false,
+                infoinferred: false,
+                specialbuild: false
+            },
+            "fileOS": {
+                dos: false,
+                os216: false,
+                os232: false,
+                nt: true,
+                windows16: false,
+                pm16: false,
+                pm32: false,
+                windows32: true,
+                unknown: false
+            },
+            "fileType": {
+                app: true,
+                dll: false,
+                drv: false,
+                font: false,
+                vxd: false,
+                staticLib: false,
+                unknown: false
+            },
+            "fileSubtype": 0x00,
+            "fileDateLS": 0,
+            "fileDateMS": 0
         }));
     });
 
@@ -64,7 +102,8 @@ describe('vs-version-info', function() {
             "FileVersion": "1.3.36.112",
             "LegalCopyright": "Copyright 2018 Google LLC",
             "ProductName": "Google Update",
-            "ProductVersion": "1.3.36.112"
+            "ProductVersion": "1.3.36.112",
+            "LanguageId": "en"
         }));
     });
 
