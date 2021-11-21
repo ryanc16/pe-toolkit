@@ -4,7 +4,7 @@ const DATA_TYPES = require('./lib/data-types');
 const SZ_WCHAR = DATA_TYPES.SZ_WCHAR;
 const {VS_VERSIONINFO_structure, StringFileInfo_structure, VarFileInfo_structure, VS_FIXEDFILEINFO_structure} = require('./lib/structures');
 
-function parse(file) {
+function parseFromFile(file) {
     const buff = new BufferReader(fs.readFileSync(file));
     const VSVersionInfoKey = SZ_WCHAR(VS_VERSIONINFO_structure.szKey.value);
     const keyLocations = buff.findOccurences(VSVersionInfoKey);
@@ -160,16 +160,40 @@ function VS_VERSIONINFO_RESULT(file, data) {
     this.file = file;
     this.data = data;
 
-    this.getPropertiesTable = function() {
-        const props = {};
-        for (infoEntry of this.data.Children.StringFileInfo.Children[0].Children) {
-            props[infoEntry.szKey] = infoEntry.Value;
-        }
-        return props;
+    this.getFixedFileInfo = function() {
+        return this.data.Value;
     }
 
-    this.getMetadata = function() {
-        return this.data.Value;
+    this.getStringFileInfo = function() {
+        const strFileInfo = {};
+        for (const infoEntry of this.data.Children.StringFileInfo.Children) {
+            strFileInfo[infoEntry.szKey] = {};
+            for (const strEntry of infoEntry.Children) {
+                strFileInfo[infoEntry.szKey][strEntry.szKey] = strEntry.Value;
+            }
+        }
+        
+        return strFileInfo;
+    }
+
+    this.getStringTables = function() {
+        const strTables = [];
+        for (const infoEntry of this.data.Children.StringFileInfo.Children) {
+            const strKV = {};
+            for (const strEntry of infoEntry.Children) {
+                strKV[strEntry.szKey] = strEntry.Value;
+            }
+            strTables.push(strKV);
+        }
+        return strTables;
+    }
+
+    this.getVarFileInfo = function() {
+        const varTable = {};
+        for (const infoEntry of this.data.Children.VarFileInfo.Children) {
+            varTable[infoEntry.szKey] = infoEntry.Value;
+        }
+        return varTable;
     }
 
     this.writeToFile = function() {
@@ -177,4 +201,4 @@ function VS_VERSIONINFO_RESULT(file, data) {
     }
 }
 
-exports.parse = parse;
+exports.parseFromFile = parseFromFile;
