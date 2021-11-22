@@ -6,26 +6,21 @@ const testBinaryFile = 'test/resources/test.bin'
 describe('vs-version-info', function() {
 
     let testBinaryData = [];
+    let results = null;
 
     beforeEach(function() {
         testBinaryData = fs.readFileSync(testBinaryFile);
-    });
-
-    it('can parse', function() {
         expect(function() {
-            vsInfo.parseBytes(testBinaryData);
+            results = vsInfo.parseBytes(testBinaryData);
         }).not.toThrow();
     });
 
     it('can get results', function() {
-        const results = vsInfo.parseBytes(testBinaryData);
-
         expect(results).toBeInstanceOf(Array);
         expect(results).toHaveSize(1);
     });
 
     it('can get vs version info', function() {
-        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const vsVersionInfo = result0.getVsVersionInfo();
         
@@ -38,13 +33,12 @@ describe('vs-version-info', function() {
     });
 
     it('can get fixed file info', function() {
-        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const fixedFileInfo = result0.getFixedFileInfo();
 
         expect(fixedFileInfo).toBeInstanceOf(Object);
         expect(fixedFileInfo).toEqual(jasmine.objectContaining({
-            "dwSignature": Buffer.from([0xBD, 0x04, 0xEF, 0xFE]),
+            "dwSignature": new Uint8Array([0xBD, 0x04, 0xEF, 0xFE]),
             "dwStrucVersion": [0x00, 0x01],
             "fileVersionLS": 3,
             "fileVersionMS": 1,
@@ -86,7 +80,6 @@ describe('vs-version-info', function() {
     });
 
     it('can get string file info table', function() {
-        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const stringFileInfo = result0.getStringFileInfo();
 
@@ -97,7 +90,6 @@ describe('vs-version-info', function() {
     });
 
     it('can get string tables', function() {
-        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const stringTables = result0.getStringTables();
 
@@ -116,14 +108,12 @@ describe('vs-version-info', function() {
     });
 
     it('can get var file info table', function() {
-        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const varFileInfo = result0.getVarFileInfo();
-
         expect(varFileInfo).toBeInstanceOf(Object);
         expect(varFileInfo).toEqual(jasmine.objectContaining({
             "Translation": [
-                Buffer.from([0x09, 0x04, 0xB0, 0x04])
+                new Uint8Array([0x09, 0x04, 0xB0, 0x04])
             ]
         }));
     });

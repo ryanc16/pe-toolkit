@@ -45,7 +45,7 @@ result.getVsVersionInfo();
 ```json
 {
   "FixedFileInfo": {
-    "dwSignature": <Buffer bd 04 ef fe>,
+    "dwSignature": Uint8Array(4) [ 189, 4, 239, 254 ],
     "dwStrucVersion": [ 0, 1 ],
     "fileVersionLS": 3,
     "fileVersionMS": 1,
@@ -99,7 +99,7 @@ result.getVsVersionInfo();
   },
   "VarFileInfo": {
     "Translation": [
-      <Buffer 09 04 b0 04>
+      Uint8Array(4) [ 9, 4, 176, 4 ]
     ]
   }
 }
@@ -116,7 +116,7 @@ result.getFixedFileInfo();
 ```
 ```json
 {
-  "dwSignature": <Buffer bd 04 ef fe>,
+  "dwSignature": Uint8Array(4) [ 189, 4, 239, 254 ],
   "dwStrucVersion": [ 0, 1 ],
   "fileVersionLS": 3,
   "fileVersionMS": 1,
@@ -225,7 +225,7 @@ result.getVarFileInfo();
 ```json
 {
   "Translation": [
-    <Buffer 09 04 b0 04>
+    Uint8Array(4) [ 9, 4, 176, 4 ]
   ]
 }
 ```
