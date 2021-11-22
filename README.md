@@ -7,19 +7,24 @@ Parsing logic implemented to the Microsoft spec: https://docs.microsoft.com/en-u
 Example usage:
 ```js
 const vsInfo = require('vs-version-info');
-// Parse the VS_VERSIONINFO table data out of the file and store the results
-const results = vsInfo.parseFromFile("./ChromeSetup.exe");
+const fs = require('fs');
+// Acquire the binary byte data by some means. Could be through the NodeJS fs module, or the HTML5 FileReader
+const bytes = fs.readFileSync("./ChromeSetup.exe");
+// Parse the VS_VERSIONINFO structure out of the provided byte data and store the results
+const results = vsInfo.parseBytes(bytes);
 
 // The spec allows for zero or more VS_VERSIONINFO tables to be embedded in a single file
 for (const result of results) {
-    // Retrieve the embedded fixed file info structure
-    const fixedFileInfo = result.getFixedFileInfo();
-    // Retrieve the embedded string file info structure
-    const stringFileInfo = result.getStringFileInfo();
-    // Retrieve the embedded string tables
-    const stringTables = result.getStringTables();
-    // Retrieve the embedded var file info structure
-    const varFileInfo = result.getVarFileInfo();
+  // Retrieve a formatted complete VS_VERSIONINFO structure
+  const vsVersionInfo = result.getVsVersionInfo();
+  // Retrieve a formatted FixedFileInfo structure
+  const fixedFileInfo = result.getFixedFileInfo();
+  // Retrieve a formatted StringFileInfo structure
+  const stringFileInfo = result.getStringFileInfo();
+  // Retrieve a list of formatted StringTable structures
+  const stringTables = result.getStringTables();
+  // Retrieve a formatted VarFileIinfo structure
+  const varFileInfo = result.getVarFileInfo();
 }
 ```
 ___
@@ -29,7 +34,7 @@ The spec allows for zero or more `VS_VERSIONINFO` tables to be embedded in a sin
 ### getVsVersionInfo()
 Get a formatted VS_VERSIONINFO data object
 
-This corresponds to the `VS_VERSIOINFO` structure spec: https://docs.microsoft.com/en-us/windows/win32/menurc/vs-versioninfo
+This corresponds to the `VS_VERSIONINFO` structure spec: https://docs.microsoft.com/en-us/windows/win32/menurc/vs-versioninfo
 
 The spec allows for zero or more VS_VERSIONINFO structures in a file
 

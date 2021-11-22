@@ -1,23 +1,31 @@
 const vsInfo = require('../index');
+const fs = require('fs');
 
-const testBinaryData = 'test/resources/test.bin'
+const testBinaryFile = 'test/resources/test.bin'
 
 describe('vs-version-info', function() {
+
+    let testBinaryData = [];
+
+    beforeEach(function() {
+        testBinaryData = fs.readFileSync(testBinaryFile);
+    });
+
     it('can parse', function() {
         expect(function() {
-            vsInfo.parseFromFile(testBinaryData);
+            vsInfo.parseBytes(testBinaryData);
         }).not.toThrow();
     });
 
     it('can get results', function() {
-        const results = vsInfo.parseFromFile(testBinaryData);
+        const results = vsInfo.parseBytes(testBinaryData);
 
         expect(results).toBeInstanceOf(Array);
         expect(results).toHaveSize(1);
     });
 
     it('can get vs version info', function() {
-        const results = vsInfo.parseFromFile(testBinaryData);
+        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const vsVersionInfo = result0.getVsVersionInfo();
         
@@ -30,7 +38,7 @@ describe('vs-version-info', function() {
     });
 
     it('can get fixed file info', function() {
-        const results = vsInfo.parseFromFile(testBinaryData);
+        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const fixedFileInfo = result0.getFixedFileInfo();
 
@@ -78,7 +86,7 @@ describe('vs-version-info', function() {
     });
 
     it('can get string file info table', function() {
-        const results = vsInfo.parseFromFile(testBinaryData);
+        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const stringFileInfo = result0.getStringFileInfo();
 
@@ -89,7 +97,7 @@ describe('vs-version-info', function() {
     });
 
     it('can get string tables', function() {
-        const results = vsInfo.parseFromFile(testBinaryData);
+        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const stringTables = result0.getStringTables();
 
@@ -108,7 +116,7 @@ describe('vs-version-info', function() {
     });
 
     it('can get var file info table', function() {
-        const results = vsInfo.parseFromFile(testBinaryData);
+        const results = vsInfo.parseBytes(testBinaryData);
         const result0 = results[0];
         const varFileInfo = result0.getVarFileInfo();
 

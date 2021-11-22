@@ -1,4 +1,3 @@
-const fs = require('fs');
 const BufferReader = require('./lib/buffer-reader');
 const DATA_TYPES = require('./lib/data-types');
 const SZ_WCHAR = DATA_TYPES.SZ_WCHAR;
@@ -6,22 +5,21 @@ const FLAGS = require('./lib/flags');
 const {VS_VERSIONINFO_structure, StringFileInfo_structure, VarFileInfo_structure, VS_FIXEDFILEINFO_structure} = require('./lib/structures');
 
 /**
- * Read a file from disk and collect all the VS_VERSIONINFO strutures found in it, if any.
+ * Read binary byte data and collect all the VS_VERSIONINFO strutures found in it, if any.
  * If no VS_VSERSIONINFO structures are found in the data, an Error indicating that will be thrown.
  * 
- * @param {string} file The path of a file on disk to parse the VS_VERSIONINFO data from
+ * @param {Buffer|Blob|Uint8Array} data The binary byte data to parse the VS_VERSIONINFO structure from
  * @returns an array of VS_VERSIONINFO_RESULT
  * @throws Error when no VS_VERSIONINFO tables can be found, or there is an error during parsing of a found structure
  */
-function parseFromFile(file) {
-    const buff = new BufferReader(fs.readFileSync(file));
+function parseBytes(data) {
+    const buff = new BufferReader(data);
     const VSVersionInfoKey = SZ_WCHAR(VS_VERSIONINFO_structure.szKey.value);
     const keyLocations = buff.findOccurences(VSVersionInfoKey);
     if (keyLocations.length === 0) {
-        throw new Error('Did not find VS_VERSION_INFO in provided executable: ' + file);
+        throw new Error('Did not find VS_VERSION_INFO in provided byte data');
     }
     const vsVersionInfoTables = [];
-    let itr = 1;
     for (const location of keyLocations) {
         let preceeding_bytes = VS_VERSIONINFO_structure.wLength.type + VS_VERSIONINFO_structure.wValueLength.type + VS_VERSIONINFO_structure.wType.type;
         
@@ -155,9 +153,7 @@ function parseFromFile(file) {
             
             VS_VERSION_INFO['Children']['VarFileInfo'] = VarFileInfo;
         }
-        vsVersionInfoTables.push(new VS_VERSIONINFO_RESULT(file, VS_VERSION_INFO));
-        
-        itr++;
+        vsVersionInfoTables.push(new VS_VERSIONINFO_RESULT(VS_VERSION_INFO));
     }
     return vsVersionInfoTables;
     
@@ -166,11 +162,9 @@ function parseFromFile(file) {
 /**
  * A parsed VS_VERSIONINFO structure result container.
  * 
- * @param {string} file The original file path on disk that was parsed.
  * @param {VS_VERSIONINFO_structure} data The javascript descriptor object containing the raw parsed data.
  */
-function VS_VERSIONINFO_RESULT(file, data) {
-    this.file = file;
+function VS_VERSIONINFO_RESULT(data) {
     this.data = data;
 
     /**
@@ -273,4 +267,4 @@ function VS_VERSIONINFO_RESULT(file, data) {
     }
 }
 
-exports.parseFromFile = parseFromFile;
+exports.parseBytes = parseBytes;
