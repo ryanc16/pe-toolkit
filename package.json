@@ -1,14 +1,15 @@
 {
-  "name": "vs-version-info",
-  "version": "0.1.0",
-  "description": "Reads the VS_VERSION_INFO data structure embedded in windows exe, msi, and dlls",
+  "name": "pe-toolkit",
+  "version": "0.2.0",
+  "description": "A tookit for working with Windows PE exe, dll, or some msi files",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine --config=jasmine.json"
+    "test": "jasmine --config=jasmine.json",
+    "example": "node examples/get-exe-info.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ryanc16/vs-version-info-js.git"
+    "url": "git+https://github.com/ryanc16/pe-toolkit.git"
   },
   "keywords": [
     "vs version info",
@@ -22,9 +23,9 @@
   "author": "ryanc16",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ryanc16/vs-version-info-js/issues"
+    "url": "https://github.com/ryanc16/pe-toolkit/issues"
   },
-  "homepage": "https://github.com/ryanc16/vs-version-info-js#readme",
+  "homepage": "https://github.com/ryanc16/pe-toolkit#readme",
   "devDependencies": {
     "jasmine": "^3.10.0"
   }

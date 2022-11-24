@@ -14,6 +14,7 @@ describe('BufferReader', function() {
 
     describe('with byte data', function() {
         let byteData = [0x08, 0x07, 0x06, 0x05, 0x04, 0x03, 0x02, 0x01];
+        /** @type BufferReader */
         let dataBuffer = null;
 
         beforeEach(function() {
@@ -88,9 +89,20 @@ describe('BufferReader', function() {
             expect(dataBuffer.offset).toEqual(2);
         });
 
-        fit('can find next word', function() {
+        it('can find next word when it exists', function() {
             expect(dataBuffer.offset).toEqual(0);
-            dataBuffer.findNextWord('08000700')
+            const loc = dataBuffer.findNextWord('0403');
+            expect(dataBuffer.offset).toEqual(0);
+            expect(loc).not.toBeNull();
+            expect(loc.start.dec).toEqual(4);
+            expect(loc.end.dec).toEqual(5);
+        });
+
+        it('can safely attempt to find next word, even when it doesn\'t exist', function() {
+            expect(dataBuffer.offset).toEqual(0);
+            const loc = dataBuffer.findNextWord('0102');
+            expect(dataBuffer.offset).toEqual(0);
+            expect(loc).toBeNull();
         });
 
     });

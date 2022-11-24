@@ -1,4 +1,4 @@
-const vsInfo = require('../index');
+const {VsVersionInfo} = require('../lib/vs-version-info');
 const fs = require('fs');
 
 const testBinaryFile = 'test/resources/test.bin'
@@ -11,7 +11,7 @@ describe('vs-version-info', function() {
     beforeEach(function() {
         testBinaryData = fs.readFileSync(testBinaryFile);
         expect(function() {
-            results = vsInfo.parseBytes(testBinaryData);
+            results = new VsVersionInfo().parseBytes(testBinaryData);
         }).not.toThrow();
     });
 
