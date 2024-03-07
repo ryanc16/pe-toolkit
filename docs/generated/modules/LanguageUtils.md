@@ -26,4 +26,4 @@
 
 #### Defined in
 
-[utils/language-utils.ts:4](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/utils/language-utils.ts#L4)
+[utils/language-utils.ts:4](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/utils/language-utils.ts#L4)

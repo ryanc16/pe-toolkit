@@ -60,7 +60,7 @@
 
 #### Defined in
 
-[pe-file-parser.ts:39](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L39)
+[pe-file-parser.ts:39](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L39)
 
 ## Properties
 
@@ -70,7 +70,7 @@
 
 #### Defined in
 
-[pe-file-parser.ts:37](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L37)
+[pe-file-parser.ts:37](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L37)
 
 ## Methods
 
@@ -84,7 +84,7 @@
 
 #### Defined in
 
-[pe-file-parser.ts:301](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L301)
+[pe-file-parser.ts:301](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L301)
 
 ___
 
@@ -98,7 +98,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:382](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L382)
+[pe-file-parser.ts:382](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L382)
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:386](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L386)
+[pe-file-parser.ts:386](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L386)
 
 ___
 
@@ -126,7 +126,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:220](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L220)
+[pe-file-parser.ts:220](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L220)
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:216](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L216)
+[pe-file-parser.ts:216](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L216)
 
 ___
 
@@ -154,7 +154,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:74](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L74)
+[pe-file-parser.ts:74](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L74)
 
 ___
 
@@ -168,7 +168,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:86](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L86)
+[pe-file-parser.ts:86](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L86)
 
 ___
 
@@ -182,7 +182,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:370](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L370)
+[pe-file-parser.ts:370](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L370)
 
 ___
 
@@ -196,7 +196,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:258](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L258)
+[pe-file-parser.ts:258](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L258)
 
 ___
 
@@ -210,7 +210,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:62](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L62)
+[pe-file-parser.ts:62](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L62)
 
 ___
 
@@ -224,7 +224,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:66](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L66)
+[pe-file-parser.ts:66](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L66)
 
 ___
 
@@ -238,7 +238,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:293](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L293)
+[pe-file-parser.ts:293](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L293)
 
 ___
 
@@ -252,7 +252,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:297](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L297)
+[pe-file-parser.ts:297](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L297)
 
 ___
 
@@ -266,7 +266,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:313](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L313)
+[pe-file-parser.ts:313](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L313)
 
 ___
 
@@ -286,7 +286,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:317](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L317)
+[pe-file-parser.ts:317](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L317)
 
 ___
 
@@ -300,7 +300,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:390](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L390)
+[pe-file-parser.ts:390](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L390)
 
 ___
 
@@ -320,7 +320,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:224](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L224)
+[pe-file-parser.ts:224](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L224)
 
 ___
 
@@ -334,7 +334,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:58](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L58)
+[pe-file-parser.ts:58](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L58)
 
 ___
 
@@ -348,7 +348,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:90](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L90)
+[pe-file-parser.ts:90](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L90)
 
 ___
 
@@ -362,7 +362,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:848](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L848)
+[pe-file-parser.ts:848](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L848)
 
 ___
 
@@ -376,7 +376,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:394](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L394)
+[pe-file-parser.ts:394](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L394)
 
 ___
 
@@ -390,7 +390,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:254](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L254)
+[pe-file-parser.ts:254](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L254)
 
 ___
 
@@ -404,7 +404,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:309](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L309)
+[pe-file-parser.ts:309](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L309)
 
 ___
 
@@ -418,7 +418,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:70](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L70)
+[pe-file-parser.ts:70](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L70)
 
 ___
 
@@ -432,7 +432,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:374](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L374)
+[pe-file-parser.ts:374](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L374)
 
 ___
 
@@ -446,7 +446,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:305](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L305)
+[pe-file-parser.ts:305](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L305)
 
 ___
 
@@ -460,7 +460,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:171](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L171)
+[pe-file-parser.ts:171](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L171)
 
 ___
 
@@ -474,7 +474,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:175](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L175)
+[pe-file-parser.ts:175](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L175)
 
 ___
 
@@ -500,7 +500,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:179](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L179)
+[pe-file-parser.ts:179](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L179)
 
 ___
 
@@ -520,7 +520,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:82](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L82)
+[pe-file-parser.ts:82](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L82)
 
 ___
 
@@ -534,7 +534,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:78](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L78)
+[pe-file-parser.ts:78](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L78)
 
 ___
 
@@ -554,7 +554,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:262](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L262)
+[pe-file-parser.ts:262](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L262)
 
 ___
 
@@ -574,7 +574,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:342](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L342)
+[pe-file-parser.ts:342](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L342)
 
 ___
 
@@ -588,7 +588,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:378](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L378)
+[pe-file-parser.ts:378](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L378)
 
 ___
 
@@ -608,7 +608,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:48](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L48)
+[pe-file-parser.ts:48](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L48)
 
 ___
 
@@ -628,7 +628,7 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:53](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L53)
+[pe-file-parser.ts:53](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L53)
 
 ___
 
@@ -648,4 +648,4 @@ ___
 
 #### Defined in
 
-[pe-file-parser.ts:44](https://github.com/ryanc16/pe-toolkit/blob/1fc3093/src/pe-file-parser.ts#L44)
+[pe-file-parser.ts:44](https://github.com/ryanc16/pe-toolkit/blob/9dcd189/src/pe-file-parser.ts#L44)
