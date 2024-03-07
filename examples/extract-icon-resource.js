@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {PeFileParser} = require('../index');
+const { PeFileParser } = require('../lib/index');
 
 const dir = './resources';
 const file = 'ChromeSetup.exe';
@@ -16,18 +16,24 @@ const peFile = new PeFileParser();
 peFile.parseBytes(buff);
 
 // Get all the icon type resources embedded in the exe file.
-const icons = peFile.getResourcesOfType(PeFileParser.RT_RESOURCE_TYPES.RT_ICON);
+const iconResources = peFile.getIconResources();
 // There may or may not be resources of the provided type, make sure there were some returned
-if (icons.length > 0) {
+if (Object.keys(iconResources).length > 0) {
+    const icons = [];
+    for (const resourceId in iconResources) {
+        for (const languageId in iconResources[resourceId]) {
+            icons.push(iconResources[resourceId][languageId]);
+        }
+    }
     // Find the best icon by finding the largest resolution one with the best bit-depth
     // The resource information doesn't indicate what file type the image is, so some liberty is take at making
     // a best guess based on the data in the resource. It is usually a ICO or PNG image type.
-    const bestIcon = icons.filter(i => i.metadata != null).sort((a, b) => (b.metadata.bWidth * b.metadata.bHeight * b.metadata.wBitCount) - (a.metadata.bWidth * a.metadata.bHeight * a.metadata.wBitCount))[0];
-    console.log(`selected icon: ${bestIcon.likelyFormat} ${bestIcon.metadata.bWidth}x${bestIcon.metadata.bHeight}-${bestIcon.metadata.wBitCount} ${bestIcon.metadata.dwBytesInRes} bytes`);
-    
+    const bestIcon = icons.filter(i => i.getMetadata() != null).sort((a, b) => (b.getMetadata().getWidth() * b.getMetadata().getHeight() * b.getMetadata().getBitCount()) - (a.getMetadata().getWidth() * a.getMetadata().getHeight() * a.getMetadata().getBitCount()))[0];
+    console.log(`selected icon: ${bestIcon.getMetadata().getWidth()}x${bestIcon.getMetadata().getHeight()}-${bestIcon.getMetadata().getBitCount()} ${bestIcon.getMetadata().getByteLength()} bytes`);
+
     // create a new file name using the same name as the original file and include the guessed image type extension.
-    const filename = filepath + bestIcon.ext;
+    const filename = filepath + bestIcon.getExtension();
     console.log('saving to:', filename);
     // Save off a new file by writing the bytes for the resource.
-    fs.writeFileSync(filename, bestIcon.data);
+    fs.writeFileSync(filename, bestIcon.export());
 }

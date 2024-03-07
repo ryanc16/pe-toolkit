@@ -1,17 +1,22 @@
-# pe-toolkit
+Example:
 
-A tookit for working with Windows PE exe, dll, and some msi files
-___
-## Quick Reference
-- [PeFileParser](#PeFileParser)
-- [Documentation](./docs/generated/classes/PeFileParser.md)  
-- [Examples](./examples/examples.md)
+**Set up**
+```js
+const fs = require('fs');
+const path = require('path');
+const { PeFileParser } = require('pe-toolkit');
 
-### PeFileParser <a id="PeFileParser"></a>
-The PeFileParser reads the header and resources information structures embeded in the header information of a WinPE file.
+const buff = fs.readFileSync('./resources/ChromeSetup.exe');
 
-#### Reading header information
-#### Dos Header
+const peFile = new PeFileParser();
+peFile.parseBytes(buff);
+```
+
+**Dos Header**
+```js
+peFile.getDosHeader().toObject()
+```
+Result:
 ```js
 {
   magic: '4d5a',
@@ -41,7 +46,11 @@ The PeFileParser reads the header and resources information structures embeded i
   fileAddressOfNewExeHeader: '00000100'
 }
 ```
-#### File Header
+**File header**
+```js
+peFile.getFileHeader().toObject();
+```
+Result:
 ```js
 {
   ntSignature: '50450000',
@@ -63,7 +72,11 @@ The PeFileParser reads the header and resources information structures embeded i
   }
 }
 ```
-#### Optional Header
+**Optional header**
+```js
+peFile.getOptionalHeader().toObject()
+```
+Result:
 ```js
 {
   magic: {
@@ -119,7 +132,10 @@ The PeFileParser reads the header and resources information structures embeded i
   }
 }
 ```
-#### Section Headers
+**Section headers**
+```js
+peFile.getSectionHeaders().map(header => header.toObject())
+```
 ```js
 [
   {
@@ -178,4 +194,29 @@ The PeFileParser reads the header and resources information structures embeded i
     characteristics: { value: '42000040', meaning: [Array] }
   }
 ]
+```
+**.data Section header**
+```js
+peFile.getSectionHeader('.data').toObject()
+```
+```js
+{
+  name: '.data',
+  virtualAddress: '0001d000',
+  pointerToRawData: '0001b800',
+  sizeOfRawData: 2560,
+  pointerToRelocations: '00000000',
+  pointerToLineNumbers: '00000000',
+  numberOfRelocations: 0,
+  numberOfLineNumbers: 0,
+  characteristics: {
+    value: 'c0000040',
+    meaning: [
+      '(0x00000040) This section contains initialized data. Almost all sections except executable and the .bss section have this flag set.',
+      '(0x40000000) This section is readable. This flag is almost always set for sections in EXE files.',
+      "(0x80000000) The section is writeable. If this flag isn't set in an EXE's section, the loader should mark the memory mapped pages as read-only or execute-only. \n" +
+        'Typical sections with this attribute are .data and .bss. Interestingly, the .idata section also has this attribute set.'
+    ]
+  }
+}
 ```

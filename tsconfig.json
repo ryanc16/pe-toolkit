@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [
+            "es2019",
+            "es2020.promise",
+            "es2020.bigint",
+            "es2020.string"
+        ],
+        "types": [
+            "node"
+        ],
+        "esModuleInterop": true,
+        "declaration": true,
+        "outDir": "./lib",
+        "strict": true
+    },
+    "include": [
+        "./src/",
+    ],
+    "exclude": [
+        "node_modules",
+        "**/__tests__/*"
+    ]
+}
